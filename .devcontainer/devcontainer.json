@@ -28,7 +28,8 @@
         "docker.docker",
         "Gruntfuggly.todo-tree",
         "esbenp.prettier-vscode",
-        "chrislajoie.vscode-modelines"
+        "chrislajoie.vscode-modelines",
+        "github.vscode-github-actions"
       ]
     }
   }
