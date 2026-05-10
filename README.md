@@ -1,2 +1,3 @@
-# docker-smtp
+# docker-msmtp
+
 MSMTP Server for Docker
