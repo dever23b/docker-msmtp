@@ -1,3 +1,7 @@
-# docker-smtp
+<h1 align="center">docker-msmtp</h1>
 
-MSMTP Server for Docker
+### About
+
+SMTP relay server using [msmtpd](https://marlam.de/msmtp).
+
+> More info: [MSMTP Documentation](https://marlam.de/msmtp/documentation/)
