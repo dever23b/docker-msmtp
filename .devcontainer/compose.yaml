@@ -1,0 +1,16 @@
+name: docker-msmtp
+
+services:
+  devcontainer:
+    build: .
+    command: /usr/bin/sleep infinity
+    # privileged: true
+    #security_opt:
+    #  - seccomp:unconfined
+    #userns_mode: host
+    user: dever23b
+    volumes:
+      - ..:/workspaces/docker-msmtp:cached
+
+
+include: [ ../deploy-test/compose.yaml ]
