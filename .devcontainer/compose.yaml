@@ -1,0 +1,9 @@
+name: docker-msmtp
+
+services:
+  devcontainer:
+    build: .
+    command: /usr/bin/sleep infinity
+    user: dever23b
+    volumes:
+      - ..:/workspaces/docker-msmtp:cached

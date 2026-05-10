@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+# spellcheck shell=bash
+
+set -e
+
+printf "EHLO healthcheck\nquit\n" | { while read line ; do sleep 0.25; echo $line; done } | \
+nc -w 1 127.0.0.1 ${SMTP_PORT:-25} | \
+grep -qE "^220.*ESMTP msmtpd"
+

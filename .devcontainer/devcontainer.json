@@ -1,0 +1,36 @@
+{
+  "name": "Ubuntu",
+  "dockerComposeFile": ["compose.yaml"],
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/docker-msmtp",
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "${localEnv:USER}",
+      "userUid": "1000",
+      "userGid": "1000"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": true,
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "chrislajoie.vscode-modelines",
+        "ms-azuretools.vscode-docker",
+        "docker.docker",
+        "Gruntfuggly.todo-tree",
+        "esbenp.prettier-vscode",
+        "chrislajoie.vscode-modelines",
+        "github.vscode-github-actions"
+      ]
+    }
+  }
+}
