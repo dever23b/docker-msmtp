@@ -27,10 +27,12 @@ jobs:
           images: |
             ${{ env.GHCR_SLUG }}
           tags: |
-            type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=edge
+          labels: |
+            maintainer=dever23b
+            org.opencontainers.image.vendor=dever23b
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v4
       - name: Setup Docker Buildx
