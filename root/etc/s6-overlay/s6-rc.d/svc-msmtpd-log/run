@@ -5,4 +5,4 @@ fdmove -c 2 1
 #redirfd -a 1 /proc/1/fd/1
 s6-setuidgid abc
 exec -c
-s6-log T 1 t s1000000 n20 /config/log/msmtpd
+s6-log T 1 T s1000000 n20 /config/log/msmtpd

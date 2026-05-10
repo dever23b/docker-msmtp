@@ -3,5 +3,7 @@
 
 echo "[init-permissions] Setting permissions..."
 lsiown -R abc:abc \
-  /config/msmtp \
+  /config/msmtp.conf \
   /config/log
+
+chmod 600 /config/msmtp.conf

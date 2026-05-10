@@ -1,7 +1,52 @@
-#!/usr/bin/execlineb -P
-with-contenv
-#echo "[svc-msmtpd] Redirecting file descriptors..."
-fdmove -c 2 1
-# fdmove 1 3
-s6-setuidgid abc 
-/app/start-msmtpd
+#!/usr/bin/with-contenv bash
+# spellcheck shell=bash
+
+PID_FILE=/var/run/msmtpd.pid
+SMTPD_AUTH=${SMTPD_AUTH:-}
+#SMTPD_LOG=${SMTP_LOG:-/config/log/msmtpd.log}
+SMTPD_PORT=${SMTP_PORT:-25}
+
+function kill_zombies() {
+  echo "Searching for zombie processes..."
+  if pgrep -f "/usr/bin/msmtpd" >/dev/null; then
+    echo "Zombie MSMTPD process(es) detected, sending SIGTERM"
+    #pkill -ef "/usr/bin/msmtpd"
+    send_signal SIGTERM
+    sleep 1
+  fi
+
+  if pgrep -f "/usr/bin/msmtpd" >/dev/null; then
+    echo "Zombie MSMTPD process(es) detected, sending SIGKILL"
+    # pkill -9 -ef "/usr/bin/msmtpd"
+    send_signal SIGKILL
+    sleep 1
+  fi
+  echo "Done"
+}
+
+function send_signal() {
+  SIGNAL="${1:-SIGTERM}"
+  echo "Sending ${SIGNAL} to msmtpd..."
+  pkill -$SIGNAL -ef "/usr/bin/msmtpd"
+}
+
+function start() {
+  msmtpd_args=(
+    --interface=0.0.0.0
+    --port="${SMTPD_PORT}" 
+    --log=/proc/self/fd/1
+    #--log="${SMTPD_LOG}"
+    # --command='/usr/bin/msmtp -f %F --'
+    --command='/usr/bin/msmtp -C /config/msmtp.conf -d -f %F --'
+  )
+
+  if [[ ! -z ${SMTP_AUTH} ]]; then
+    msmtpd_args+=(--auth="${SMTPD_AUTH}")
+  fi
+
+  echo "Starting SMTP Server..."
+  exec s6-setuidgid abc /usr/bin/msmtpd "${msmtpd_args[@]}" 2>&1
+}
+
+kill_zombies
+start

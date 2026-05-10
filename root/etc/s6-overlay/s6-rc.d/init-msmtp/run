@@ -13,10 +13,10 @@ if [[ ! -d /config/log/msmtpd ]]; then
 fi
 
 if [[ ! -f /config/log/msmtpd.log ]]; then
-  ln -sf /config/log/msmtpd/current /config/log/msmtpd.log
+  ln -sf msmtpd/current /config/log/msmtpd.log
 fi
 
 # create config
-if [[ ! -f /config/msmtp/config ]]; then
-  cp /defaults/msmtp/config /config/msmtp/config
+if [[ ! -f /config/msmtp.conf ]]; then
+  cp /defaults/msmtp.conf /config/msmtp.conf
 fi
