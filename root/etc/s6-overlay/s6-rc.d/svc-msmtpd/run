@@ -3,21 +3,18 @@
 
 PID_FILE=/var/run/msmtpd.pid
 SMTPD_AUTH=${SMTPD_AUTH:-}
-#SMTPD_LOG=${SMTP_LOG:-/config/log/msmtpd.log}
 SMTPD_PORT=${SMTP_PORT:-25}
 
 function kill_zombies() {
   echo "Searching for zombie processes..."
   if pgrep -f "/usr/bin/msmtpd" >/dev/null; then
     echo "Zombie MSMTPD process(es) detected, sending SIGTERM"
-    #pkill -ef "/usr/bin/msmtpd"
     send_signal SIGTERM
     sleep 1
   fi
 
   if pgrep -f "/usr/bin/msmtpd" >/dev/null; then
     echo "Zombie MSMTPD process(es) detected, sending SIGKILL"
-    # pkill -9 -ef "/usr/bin/msmtpd"
     send_signal SIGKILL
     sleep 1
   fi
@@ -35,8 +32,6 @@ function start() {
     --interface=0.0.0.0
     --port="${SMTPD_PORT}" 
     --log=/proc/self/fd/1
-    #--log="${SMTPD_LOG}"
-    # --command='/usr/bin/msmtp -f %F --'
     --command='/usr/bin/msmtp -C /config/msmtp.conf -d -f %F --'
   )
 
