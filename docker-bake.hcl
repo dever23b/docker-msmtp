@@ -23,7 +23,6 @@ target "test" {
 target "all" {
   inherits = [ "image" ]
   platforms = [
-    "linux/amd64",
-    "linux/arm64",
+    "linux/amd64"
   ]
 }
