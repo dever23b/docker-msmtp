@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+# spellcheck shell=bash
+
+# make folders
+echo "[init-folders] Ensure required folder structure exists..."
+mkdir -p \
+  /config/log/msmtpd \
+  /config/msmtp

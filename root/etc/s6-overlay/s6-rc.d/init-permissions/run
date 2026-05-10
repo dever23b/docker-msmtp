@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+# spellcheck shell=sh
+
+echo "[init-permissions] Setting permissions..."
+lsiown -R abc:abc \
+  /config/msmtp \
+  /config/log

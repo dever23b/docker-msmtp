@@ -1,0 +1,3 @@
+defaults
+#logfile /config/log/msmtp.log
+syslog off

@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+# spellcheck shell=bash
+
+echo "[init-msmtp] Configuring MSMTP..."
+
+# create log files
+if [[ ! -f /config/log/msmtp.log ]]; then
+  touch /config/log/msmtp.log
+fi
+
+if [[ ! -d /config/log/msmtpd ]]; then
+  mkdir /config/log/msmtpd
+fi
+
+if [[ ! -f /config/log/msmtpd.log ]]; then
+  ln -sf /config/log/msmtpd/current /config/log/msmtpd.log
+fi
+
+# create config
+if [[ ! -f /config/msmtp/config ]]; then
+  cp /defaults/msmtp/config /config/msmtp/config
+fi
